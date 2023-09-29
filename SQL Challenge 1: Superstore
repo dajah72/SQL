@@ -1,4 +1,4 @@
-#This project utilizes the follow Superstore data:
+# This project utilizes the following Superstore data:
 
 CREATE TABLE superstore (
     item_id INTEGER PRIMARY KEY,
@@ -28,21 +28,21 @@ VALUES
     (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
 
 
-#Use a SELECT statement to order the items by price.
+# Use a SELECT statement to order the items by price.
 SELECT item_name, price
 FROM superstore
 ORDER BY price DESC;
 
-#Show a statistic about the item prices.
+# Show a statistic about the item prices.
 SELECT ROUND(avg(price)
 FROM superstore;
 
-#Show a statistic about the price for items in the category of "Kitchen Supplies". 
+# Show a statistic about the price for items in the category of "Kitchen Supplies". 
 SELECT category, ROUND(avg(price))
 FROM superstore
 WHERE category = "Kitchen Supplies";
 
-#Show a statistic that determines which category of items is the highest rated in the store.
+# Show a statistic that determines which category of items is the highest rated in the store.
 SELECT category, ROUND(avg(average_rating), 1) AS category_avg_rating
 FROM superstore
 GROUP BY category 
