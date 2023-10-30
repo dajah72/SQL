@@ -1,0 +1,67 @@
+# For this project, I downloaded Spotify data from Kaggle.
+# Then I created a table to insert Spotify data into.
+# Finally, I performed analytics on the data using SQL. 
+
+#Creating the table: 
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+#Then I inserted the Spotify Data .csv into the table.
+
+#Next, I explored the data using the following SQL.
+
+#First, I determined the average danceability, popularity, and energy by artist and track.
+SELECT artist_name,
+track_name,
+AVG(danceability),
+AVG(popularity),
+AVG(energy)
+FROM SpotifyData
+GROUP BY artist_name, track_name;
+
+#Then I determined who the Top 10 artists are by popularity.
+SELECT artist_name, track_name, popularity
+FROM SpotifyData
+ORDER BY popularity DESC
+LIMIT 10;
+
+#Then I determined what the song key is for the Top 10 most popular songs.
+SELECT artist_name, track_name, song_key
+FROM SpotifyData
+ORDER BY popularity DESC
+LIMIT 10;
+
+#And the song key for the 10 least popular songs.
+SELECT artist_name, track_name, song_key
+FROM SpotifyData
+ORDER BY popularity ASC
+LIMIT 10;
+
+#I determined the number of distinct artists that make up the Top 50 songs of 2021.
+SELECT COUNT(distinct artist_name)
+FROM SpotifyData;
+
+#And which artists had more than 1 song in the list of Top 50 songs. 
+SELECT artist_name
+FROM spotifydata
+GROUP BY artist_name
+HAVING COUNT(artist_name)>1;
+
