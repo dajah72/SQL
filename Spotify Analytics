@@ -49,12 +49,6 @@ FROM SpotifyData
 ORDER BY popularity DESC
 LIMIT 10;
 
-#And the song key for the 10 least popular songs.
-SELECT artist_name, track_name, song_key
-FROM SpotifyData
-ORDER BY popularity ASC
-LIMIT 10;
-
 #I determined the number of distinct artists that make up the Top 50 songs of 2021.
 SELECT COUNT(distinct artist_name)
 FROM SpotifyData;
@@ -65,3 +59,11 @@ FROM spotifydata
 GROUP BY artist_name
 HAVING COUNT(artist_name)>1;
 
+#Finally, I created a case to display which songs work best on a Party Playlist, based on danceability and overall positivity.
+SELECT track_name, artist_name,
+CASE 
+    WHEN danceability>0.70 AND valence>0.50 THEN 'Included in party playlist'
+    ELSE 'Not included in party playlist'
+END AS PartyPlaylist
+FROM SpotifyData
+WHERE PartyPlaylist= 'Included in party playlist';
